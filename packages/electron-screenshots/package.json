@@ -38,6 +38,7 @@
     "akey-react-screenshots": "^1.0.1",
     "debug": "^4.3.3",
     "fs-extra": "^10.1.0",
+    "node-screenshots": "^0.1.1",
     "screenshot-desktop": "^1.12.7"
   },
   "peerDependencies": {
@@ -59,5 +60,5 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.5.5"
   },
-  "gitHead": "3bfe81060c9925036d38f89c5ddaab1e25219b15"
+  "gitHead": "9d8ca4132fea67c05647bad1abcc5b10d7409ee5"
 }

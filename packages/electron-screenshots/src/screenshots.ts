@@ -11,7 +11,7 @@ import {
 } from 'electron'
 import path from 'path'
 import Events from 'events'
-import screenshot from 'screenshot-desktop'
+// import screenshot from 'screenshot-desktop'
 import fs from 'fs-extra'
 import Event from './event'
 import getDisplay, { Display } from './getDisplay'

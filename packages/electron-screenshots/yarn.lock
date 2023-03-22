@@ -266,11 +266,6 @@ ajv@^6.10.0, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-akey-react-screenshots@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/akey-react-screenshots/-/akey-react-screenshots-1.0.1.tgz#98aa3959b2f14aca8a81ef72f0f979d206230075"
-  integrity sha512-RCKSms5uH06lRgcbkV0yvIYiGmGGaHv3xCQ42xdrs5PWy99Eg5PY7TAruCWQeqlm78lhfxmbwD3Dr/VcjbTHDw==
-
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
@@ -1378,6 +1373,54 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
+
+node-screenshots-darwin-arm64@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/node-screenshots-darwin-arm64/-/node-screenshots-darwin-arm64-0.1.1.tgz#d581cfb26b9ac7168a9568055c02f76c97831854"
+  integrity sha512-ECseBNybDcl5W8hMNo35gLqob7DJIcGQAYrCMvP7wrthQT6WLlynrkJCfPWHXjHM821huvoFfgVr00od0GTZRA==
+
+node-screenshots-darwin-x64@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/node-screenshots-darwin-x64/-/node-screenshots-darwin-x64-0.1.1.tgz#fb4bc3d890c8a6ef2377d2e0e893945b8892cce6"
+  integrity sha512-Ah8z6V8xQhmLyem7UnTWyOAGONJVklSLDnggUIXpIxZ9ecsbD0083bl2K+Cx/fLzP8akKRJ4s6domssgCKgJRg==
+
+node-screenshots-linux-x64-gnu@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/node-screenshots-linux-x64-gnu/-/node-screenshots-linux-x64-gnu-0.1.1.tgz#2b5d58eaba5a4b8f17c8d7531b86c583e815bd1f"
+  integrity sha512-K/cd3ZdN1wO/6gTImOkougROrPkbI/6Inn152x3ZiQgxbZ4a7n75fq+wRRonSh7YzGPdBvvSPGRwDtXK9Da8Ew==
+
+node-screenshots-linux-x64-musl@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/node-screenshots-linux-x64-musl/-/node-screenshots-linux-x64-musl-0.1.1.tgz#3bf37e1b499f046a122a283d08289231c3ec648c"
+  integrity sha512-Ag++DSXrOkf1fvjaHjlTHJzKhpCV66L4/9zTQJgeLfZkJIlgegdmH/35kXvOzKPUcjzAb+GDeDOkbO6/VgfIEA==
+
+node-screenshots-win32-arm64-msvc@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/node-screenshots-win32-arm64-msvc/-/node-screenshots-win32-arm64-msvc-0.1.1.tgz#7206ac99d243769173bd6593fbd56520e08c2e2e"
+  integrity sha512-hB5Cm0s0SoaN6RmmRzoBN9A7PGnVqGSfx2qnOclG351N4YRQf9uU0pgDcZMVzPfi6mzHlx/VRsJOwtQgXVKOFg==
+
+node-screenshots-win32-ia32-msvc@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/node-screenshots-win32-ia32-msvc/-/node-screenshots-win32-ia32-msvc-0.1.1.tgz#fac73f6b79f4381f41a8ab8696b993950096bbb1"
+  integrity sha512-4nRBAlkNrKvJ7AIQC2lBZykju9lzX/VGYhffVcMpPvgY5d/S67ir2aME/KsXTDFbWclzxU8grlvL9Tx14s8q/w==
+
+node-screenshots-win32-x64-msvc@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/node-screenshots-win32-x64-msvc/-/node-screenshots-win32-x64-msvc-0.1.1.tgz#7e5a7a1339c7fe4fce9370e74eed38de92fa951b"
+  integrity sha512-yI1Yf4HZTE+mtLZKsM9gFfrf/MsCywAQ5o/Xmd0uovdtt3IYRxc/QUatxbUQyl7mWX/TRJlj4ihIET4/rFRY5Q==
+
+node-screenshots@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/node-screenshots/-/node-screenshots-0.1.1.tgz#6556f0710fb00b79bed5474844e3ac24791f2dbf"
+  integrity sha512-XhteRLrlrpzMo1ZxaxkQ8URo6vqtqLRy3GVzVEWupYrZYUFgC7tBAC9kqemxXvugtS5ufYqqdyoLhHcWhKLvOQ==
+  optionalDependencies:
+    node-screenshots-darwin-arm64 "0.1.1"
+    node-screenshots-darwin-x64 "0.1.1"
+    node-screenshots-linux-x64-gnu "0.1.1"
+    node-screenshots-linux-x64-musl "0.1.1"
+    node-screenshots-win32-arm64-msvc "0.1.1"
+    node-screenshots-win32-ia32-msvc "0.1.1"
+    node-screenshots-win32-x64-msvc "0.1.1"
 
 normalize-url@^6.0.1:
   version "6.1.0"
