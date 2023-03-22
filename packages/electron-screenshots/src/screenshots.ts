@@ -269,14 +269,63 @@ export class Screenshots extends Events {
 
   private async capture (display: Display): Promise<string> {
     this.logger('SCREENSHOTS:capture')
-    
-    let index = display.id - 1
-    if (index < 0) {
-      index = 0
-    }
-    const imgPath = await screenshot({ filename: this.screenshotPath, screen: index})
 
-    return `file://${imgPath}`
+    try {
+      const { Screenshots: NodeScreenshots } = await import('node-screenshots')
+      const capturer = NodeScreenshots.fromPoint(display.x + display.width / 2, display.y + display.height / 2)
+      this.logger('SCREENSHOTS:capture NodeScreenshots.fromPoint arguments %o', display)
+      this.logger(
+        'SCREENSHOTS:capture NodeScreenshots.fromPoint return %o',
+        capturer
+          ? {
+              id: capturer.id,
+              x: capturer.x,
+              y: capturer.y,
+              width: capturer.width,
+              height: capturer.height,
+              rotation: capturer.rotation,
+              scaleFactor: capturer.scaleFactor,
+              isPrimary: capturer.isPrimary
+            }
+          : null
+      )
+
+      if (!capturer) {
+        throw new Error(`NodeScreenshots.fromDisplay(${display.id}) get null`)
+      }
+
+      const image = await capturer.capture()
+      return `data:image/png;base64,${image.toString('base64')}`
+    } catch (err) {
+      this.logger('SCREENSHOTS:capture NodeScreenshots capture() error %o', err)
+
+      const sources = await desktopCapturer.getSources({
+        types: ['screen'],
+        thumbnailSize: {
+          width: display.width * 1,
+          height: display.height * 1
+        }
+      })
+
+      let source
+      // Linux系统上，screen.getDisplayNearestPoint 返回的 Display 对象的 id
+      // 和这里 source 对象上的 display_id(Linux上，这个值是空字符串) 或 id 的中间部分，都不一致
+      // 但是，如果只有一个显示器的话，其实不用判断，直接返回就行
+      if (sources.length === 1) {
+        source = sources[0]
+      } else {
+        source = sources.find(source => {
+          return source.display_id === display.id.toString() || source.id.startsWith(`screen:${display.id}:`)
+        })
+      }
+
+      if (!source) {
+        this.logger("SCREENSHOTS:capture Can't find screen source. sources: %o, display: %o", sources, display)
+        throw new Error("Can't find screen source")
+      }
+
+      return source.thumbnail.toDataURL()
+    }
   }
 
   /**
