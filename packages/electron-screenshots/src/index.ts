@@ -8,7 +8,7 @@ app.whenReady().then(() => {
     },
     singleWindow: true
   })
-  screenshots.$view.webContents.openDevTools()
+  // screenshots.$view.webContents.openDevTools()
 
   globalShortcut.register('ctrl+shift+a', () => {
     screenshots.startCapture()

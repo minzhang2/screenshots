@@ -3,13 +3,14 @@ import Screenshots from '../Screenshots'
 import { Bounds } from '../Screenshots/types'
 import { Lang } from '../Screenshots/zh_CN'
 import './app.less'
-
+import BlackImg from '../web/black.png'
 export interface Display {
-  id: number
-  x: number
-  y: number
-  width: number
-  height: number
+  id: number;
+  index: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }
 
 export default function App (): JSX.Element {
@@ -18,6 +19,12 @@ export default function App (): JSX.Element {
   const [height, setHeight] = useState(window.innerHeight)
   const [display, setDisplay] = useState<Display | undefined>(undefined)
   const [lang, setLang] = useState<Lang | undefined>(undefined)
+  const [boundsDisplayIndex, setBoundsDisplayIndex] = useState<number>(-1)
+
+  // 每次有新的截图任务时，重置，不然会有缓存
+  useEffect(() => {
+    setBoundsDisplayIndex(-1)
+  }, [url])
 
   const onSave = useCallback(
     async (blob: Blob | null, bounds: Bounds) => {
@@ -48,27 +55,45 @@ export default function App (): JSX.Element {
       setLang(lang)
     }
 
-    const onCapture = (display: Display, dataURL: string) => {
+    const onCapture = (
+      display: Display,
+      dataURL: string,
+      options?: {
+        enableBlackMask: boolean
+      }
+    ) => {
       setDisplay(display)
-      setUrl(dataURL)
+      console.log('options', options)
+      if (options?.enableBlackMask) {
+        setUrl(BlackImg)
+      } else {
+        setUrl(dataURL)
+      }
     }
 
     const onReset = () => {
       setUrl(undefined)
       setDisplay(undefined)
+      setBoundsDisplayIndex(-1)
       // 确保截图区域被重置
       requestAnimationFrame(() => window.screenshots.reset())
+    }
+
+    const onBoundsSelect = (index: number) => {
+      setBoundsDisplayIndex(index)
     }
 
     window.screenshots.on('setLang', onSetLang)
     window.screenshots.on('capture', onCapture)
     window.screenshots.on('reset', onReset)
+    window.screenshots.on('boundsSelectUpdate', onBoundsSelect)
     // 告诉主进程页面准备完成
     window.screenshots.ready()
     return () => {
       window.screenshots.off('capture', onCapture)
       window.screenshots.off('setLang', onSetLang)
       window.screenshots.off('reset', onReset)
+      window.screenshots.off('boundsSelectUpdate', onBoundsSelect)
     }
   }, [])
 
@@ -93,6 +118,7 @@ export default function App (): JSX.Element {
         lang={lang}
         onSave={onSave}
         onCancel={onCancel}
+        boundsDisplayIndex={boundsDisplayIndex}
         onOk={onOk}
       />
     </div>

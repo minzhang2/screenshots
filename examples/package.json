@@ -1,0 +1,31 @@
+{
+  "name": "@umijs/electron-template",
+  "version": "1.0.1",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "akey-electron-screenshots": "1.0.16-beta.5",
+    "akey-react-screenshots": "/Users/ansiyuan/Documents/ansiyuan/packages/screenshots/packages/react-screenshots",
+    "check-disk-space": "^3.4.0",
+    "electron-log": "^4.4.8",
+    "umi": "^4.0.42"
+  },
+  "devDependencies": {
+    "@tsconfig/node14": "^1.0.3",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@umijs/plugin-electron": "^0.2.0",
+    "electron": "23.1.1",
+    "electron-devtools-installer": "^3.2.0",
+    "typescript": "^4.1.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

@@ -14,6 +14,8 @@ export interface ScreenshotsContextStore {
   bounds: Bounds | null
   cursor?: string
   operation?: string
+  boundsDisplayIndex: number
+  displayIndex: number
 }
 
 export interface ScreenshotsContextDispatcher {
@@ -44,7 +46,9 @@ export default React.createContext<ScreenshotsContextValue>({
     },
     bounds: null,
     cursor: 'move',
-    operation: undefined
+    operation: undefined,
+    boundsDisplayIndex: -1,
+    displayIndex: -1
   },
   dispatcher: {
     call: undefined,

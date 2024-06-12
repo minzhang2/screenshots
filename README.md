@@ -11,6 +11,7 @@ electron 截图插件和 react 截图插件，[在线示例](https://github.com/
 - 多语言支持
 - 截图操作：马赛克、文本、画笔、箭头、椭圆、矩形
 
+
 ## electron-screenshots
 
 electron 截图插件，[electron-screenshots 文档](./packages/electron-screenshots/README.md)
@@ -26,3 +27,8 @@ react 截图界面插件与`electron-screenshots`渲染 进程界面，[react-sc
 ### Install
 
 [![NPM](https://nodei.co/npm/react-screenshots.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-screenshots/)
+
+调试
+
+lerna exec -- yarn link
+yarn link akey-electron-screenshots

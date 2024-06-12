@@ -14,12 +14,14 @@ export interface ScreenshotsProps {
   url?: string
   width: number
   height: number
+  boundsDisplayIndex: number;
   lang?: Partial<Lang>
   className?: string
   [key: string]: unknown
 }
 
-export default function Screenshots ({ url, width, height, lang, className, ...props }: ScreenshotsProps): ReactElement {
+export default function Screenshots ({ url, width, height, lang, className, boundsDisplayIndex, ...props }: ScreenshotsProps): ReactElement {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const image = useGetLoadedImage(url)!
   const canvasContextRef = useRef<CanvasRenderingContext2D>(null)
   const emiterRef = useRef<Emiter>({})
@@ -30,6 +32,8 @@ export default function Screenshots ({ url, width, height, lang, className, ...p
   const [bounds, setBounds] = useState<Bounds | null>(null)
   const [cursor, setCursor] = useState<string | undefined>('move')
   const [operation, setOperation] = useState<string | undefined>(undefined)
+  const searchParams = new URLSearchParams(window.location.search)
+  const displayIndex = Number(searchParams.get('displayIndex'))
 
   const store = {
     url,
@@ -45,7 +49,9 @@ export default function Screenshots ({ url, width, height, lang, className, ...p
     history,
     bounds,
     cursor,
-    operation
+    operation,
+    boundsDisplayIndex,
+    displayIndex
   }
 
   const call = useCallback(
@@ -85,6 +91,11 @@ export default function Screenshots ({ url, width, height, lang, className, ...p
 
   const onDoubleClick = useCallback(
     async (e: MouseEvent) => {
+      const enableDoubleClick = boundsDisplayIndex === -1 || boundsDisplayIndex === displayIndex
+      if (!enableDoubleClick) {
+        return
+      }
+
       if (e.button !== 0 || !image) {
         return
       }
@@ -118,7 +129,7 @@ export default function Screenshots ({ url, width, height, lang, className, ...p
         })
       }
     },
-    [image, history, bounds, width, height, call]
+    [image, history, bounds, width, height, call, boundsDisplayIndex, displayIndex]
   )
 
   const onContextMenu = useCallback(
@@ -133,6 +144,7 @@ export default function Screenshots ({ url, width, height, lang, className, ...p
     [call]
   )
 
+  // eslint-disable-next-line
   const handleKeyDown = (e: any) => {
     if (e.keyCode !== 13) {
       console.log(e)
